@@ -44,7 +44,7 @@ def create_asteroid():
         "speed": random.randint(3, 8)
     }
     return asteroid
-########################################################################################
+    
 def create_power_up():
     power_up = {
         "image": power_up_img,
@@ -53,6 +53,7 @@ def create_power_up():
         "speed": 3
     }
     return power_up
+########################################################################################
 
 def move_spaceship(spaceship, dx):
     spaceship["rect"].x += dx
