@@ -190,7 +190,7 @@ def main():
             SCREEN.blit(score_text, (10, 10))
 
             draw_power_up_timer(SCREEN, spaceship)
-            pygame.display.flip()
+            pygame.display.update() # or .flip() 
 
     pygame.quit()
 
