@@ -66,8 +66,8 @@ def create_power_up():
 
 # This is a function to make the spaceship move on the x axis only
 # & to make the spaceship stay within the bound of the screen's width
-def spaceship_movement(spaceship, i): 
-    spaceship["rect"].x += i
+def spaceship_movement(spaceship, move): 
+    spaceship["rect"].x += move
     if spaceship["rect"].left < 0:
         spaceship["rect"].left = 0
     if spaceship["rect"].right > SCREEN_WIDTH:
