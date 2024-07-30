@@ -32,15 +32,6 @@ power_up_img = pygame.transform.scale(power_up_img, (POWER_UP_WIDTH, POWER_UP_HE
 # The create_whatever function just returns a dictionary #
 # of the "whatever"'s properties, same as assigning diff #
 # variables for a single "whatever", except more compact #
-def countdown(surface, font, timer):
-    while timer > 0:
-        surface.fill(BLACK)
-        timer_text = font.render(f"Game starts in: {timer} seconds", True, WHITE)
-        surface.blit(timer_text, (SCREEN_WIDTH // 2 - timer_text.get_width() // 2, SCREEN_HEIGHT // 2 - timer_text.get_height() // 2))
-        pygame.display.flip()
-        pygame.time.delay(1000)
-        timer -= 1
-
 def create_spaceship():
     spaceship = {
         "image": spaceship_img,
@@ -51,6 +42,7 @@ def create_spaceship():
         "power_up_duration": 3000
     }
     return spaceship
+#spaceship_rect
 
 def create_enemy():
     enemy = {
@@ -121,16 +113,28 @@ def draw_power_up_timer(text_area, spaceship, font):
         text_area.blit(timer_text, (SCREEN_WIDTH - 200, 10))
 
 # This is a function that prints/blits out the message "defeat" and resets the game on the screen when called
-#  (the text at the center of the screen, then has a 3 sec delay before a reset)
-def draw_defeat(surface, font, score_text):
+# (the text at the center of the screen, then has a 3 sec delay before a reset)
+def draw_defeat(text, font, score_text):
     defeat_text = font.render("DEFEAT", True, WHITE)
     # defeat_score = font.render(score_text, True, WHITE) 
-    surface.blit(defeat_text, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 2 - defeat_text.get_height() // 2))
+    text.blit(defeat_text, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 2 - defeat_text.get_height() // 2))
     # surface.blit(defeat_score, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 4 - defeat_text.get_height() // 4))
     pygame.display.flip()
     pygame.time.delay(3000)
     return True
 
+# This is a function that prints/blits out the message "Game starts in whatever seconds" on the screen when called
+# (this is a text at the center of the screen)
+def countdown(text, font, timer):
+    while timer > 0:
+        text.fill(BLACK)
+        timer_text = font.render("Game starts in: " + str(timer) + " seconds", True, WHITE)
+        text.blit(timer_text, (SCREEN_WIDTH // 2 - timer_text.get_width() // 2, SCREEN_HEIGHT // 2 - timer_text.get_height() // 2))
+        pygame.display.flip()
+        pygame.time.delay(1000)
+        timer -= 1
+
+# Where the magic and chaos beings
 def main():
     clock = pygame.time.Clock()
     font = pygame.font.SysFont("Times New Roman", 36)
