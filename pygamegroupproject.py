@@ -60,6 +60,7 @@ def create_power_up():
         "speed": 3
     }
     return power_up
+# ****************************************************** #
 
 
 # This is a function to make the spaceship move on the x axis only
@@ -99,24 +100,24 @@ def falling_power_up(power_up):
 
 # This is a function to print/blit out all the images on the screen when called
 # (the image and its rectangle is blited)
-def draw_image(image, surface):
-    surface.blit(image["image"], image["rect"].topleft)
+def draw_image(image, screen):
+    screen.blit(image["image"], image["rect"].topleft)
 
 # This is a function that prints/blits out the power up's duration on screen when called 
 # (the text) 
-def draw_power_up_timer(text_area, spaceship, font):
+def draw_power_up_timer(screen, spaceship):
     if spaceship["powered_up"]:
         current_time = pygame.time.get_ticks()
         remaining_time = max(0, spaceship["power_up_duration"] - (current_time - spaceship["power_up_time"]))
-        timer_text = font.render(f"Power-up: {remaining_time / 1000:.1f}s", True, WHITE)
-        text_area.blit(timer_text, (SCREEN_WIDTH - 200, 10))
+        timer_text = pygame.font.SysFont("Times New Roman", 36).render(f"Power-up: {remaining_time / 1000:.1f}s", True, WHITE)
+        screen.blit(timer_text, (SCREEN_WIDTH - 200, 10))
 
 # This is a function that prints/blits out the message "defeat" and resets the game on the screen when called
 # (the text at the center of the screen, then has a 3 sec delay before a reset)
-def draw_defeat(text, font, score_text):
+def draw_defeat(screen, font, score_text):
     defeat_text = font.render("DEFEAT", True, WHITE)
     # defeat_score = font.render(score_text, True, WHITE) 
-    text.blit(defeat_text, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 2 - defeat_text.get_height() // 2))
+    screen.blit(defeat_text, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 2 - defeat_text.get_height() // 2))
     # surface.blit(defeat_score, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 4 - defeat_text.get_height() // 4))
     pygame.display.flip()
     pygame.time.delay(3000)
@@ -124,11 +125,11 @@ def draw_defeat(text, font, score_text):
 
 # This is a function that prints/blits out the message "Game starts in whatever seconds" on the screen when called
 # (this is a text at the center of the screen)
-def countdown(text, font, timer):
+def countdown(screen, timer):
     while timer > 0:
-        text.fill(BLACK)
-        timer_text = font.render("Game starts in: " + str(timer) + " seconds", True, WHITE)
-        text.blit(timer_text, (SCREEN_WIDTH // 2 - timer_text.get_width() // 2, SCREEN_HEIGHT // 2 - timer_text.get_height() // 2))
+        screen.fill(BLACK)
+        timer_text = pygame.font.SysFont("Times New Roman", 36).render("Game starts in: " + str(timer) + " seconds", True, WHITE)
+        screen.blit(timer_text, (SCREEN_WIDTH // 2 - timer_text.get_width() // 2, SCREEN_HEIGHT // 2 - timer_text.get_height() // 2))
         pygame.display.flip()
         pygame.time.delay(1000)
         timer -= 1
@@ -136,14 +137,14 @@ def countdown(text, font, timer):
 # Where the magic and chaos beings
 def main():
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont("Times New Roman", 36)
+    
     running = True
     SCREEN.fill(BLACK)
-    countdown(SCREEN, font, 5)
+    countdown(SCREEN, 5)
     while running:
         spaceship = create_spaceship()
         enemys = [create_enemy() for _ in range(5)]
-        power_ups = [create_power_up() for _ in range(2)]
+        power_ups = [create_power_up() for _ in range(1)]
         score = 0
 
         game_over = False
@@ -158,7 +159,7 @@ def main():
             for enemy in enemys:
                 falling_enemy(enemy)
                 if spaceship["rect"].colliderect(enemy["rect"]):
-                    game_over = draw_defeat(SCREEN, font, score_text)
+                    game_over = draw_defeat(SCREEN, score_text)
 
             for power_up in power_ups:
                 falling_power_up(power_up)
@@ -185,10 +186,10 @@ def main():
                 draw_image(power_up, SCREEN)
 
             score += 1
-            score_text = font.render(f"Score: {score}", True, WHITE)
+            score_text = pygame.font.SysFont("Times New Roman", 36).render(f"Score: {score}", True, WHITE)
             SCREEN.blit(score_text, (10, 10))
 
-            draw_power_up_timer(SCREEN, spaceship, font)
+            draw_power_up_timer(SCREEN, spaceship)
             pygame.display.flip()
 
     pygame.quit()
