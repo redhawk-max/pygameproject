@@ -142,6 +142,7 @@ def main():
     running = True
     SCREEN.fill(BLACK)
     countdown(SCREEN, 5)
+    # Overall game session
     while running:
         spaceship = create_spaceship()
         enemys = [create_enemy() for _ in range(5)]
@@ -149,7 +150,7 @@ def main():
         score = 0
 
         game_over = False
-
+        # Specific game mechanics 
         while not game_over:
             clock.tick(FPS)
             for event in pygame.event.get():
