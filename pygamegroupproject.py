@@ -42,7 +42,6 @@ def create_spaceship():
         "power_up_duration": 3000
     }
     return spaceship
-#spaceship_rect
 
 def create_enemy():
     enemy = {
