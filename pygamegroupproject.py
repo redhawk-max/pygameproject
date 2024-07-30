@@ -32,6 +32,15 @@ power_up_img = pygame.transform.scale(power_up_img, (POWER_UP_WIDTH, POWER_UP_HE
 # The create_whatever function just returns a dictionary #
 # of the "whatever"'s properties, same as assigning diff #
 # variables for a single "whatever", except more compact #
+def countdown(surface, font, timer):
+    while timer > 0:
+        surface.fill(BLACK)
+        timer_text = font.render(f"Game starts in: {timer} seconds", True, WHITE)
+        surface.blit(timer_text, (SCREEN_WIDTH // 2 - timer_text.get_width() // 2, SCREEN_HEIGHT // 2 - timer_text.get_height() // 2))
+        pygame.display.flip()
+        pygame.time.delay(1000)
+        timer -= 1
+
 def create_spaceship():
     spaceship = {
         "image": spaceship_img,
@@ -126,7 +135,8 @@ def main():
     clock = pygame.time.Clock()
     font = pygame.font.SysFont("Times New Roman", 36)
     running = True
-
+    SCREEN.fill(BLACK)
+    countdown(SCREEN, font, 5)
     while running:
         spaceship = create_spaceship()
         enemys = [create_enemy() for _ in range(5)]
