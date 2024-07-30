@@ -1,13 +1,14 @@
+# Importing Libraries for specific functions and methods
 import pygame
 import random
 import os
-
+# Importing Modules for a specific use cases i.e. font, mixer
 pygame.init()
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("enemy Dodger")
+pygame.display.set_caption("Enemy Dodger")
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 FPS = 60
