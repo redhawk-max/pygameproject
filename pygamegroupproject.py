@@ -72,8 +72,8 @@ def spaceship_movement(spaceship, i):
         spaceship["rect"].right = SCREEN_WIDTH
 
 # This is a function to make the changes on spaceship 
-# When it touches the power_up
-def update_spaceship(spaceship):
+# When it is powered up (interacts with the power up)
+def powered_up_spaceship(spaceship):
     if spaceship["powered_up"]:
         current_time = pygame.time.get_ticks()
         if current_time - spaceship["power_up_time"] > spaceship["power_up_duration"]:
@@ -81,36 +81,43 @@ def update_spaceship(spaceship):
             spaceship["powered_up"] = False
 
 # This is a function to make the changes on enemy spaceship 
-def update_enemy(enemy):
+# When it falls out of screen, it resets
+def falling_enemy(enemy):
     enemy["rect"].y += enemy["speed"]
     if enemy["rect"].top > SCREEN_HEIGHT:
         enemy["rect"].x = random.randint(0, SCREEN_WIDTH - ENEMY_WIDTH)
         enemy["rect"].y = random.randint(-100, -40)
         enemy["speed"] = random.randint(3, 8)
 
-# Function to update the power-up
-def update_power_up(power_up):
+# This is a function to make the changes on power up
+# When it falls out of screen, it resets
+def falling_power_up(power_up):
     power_up["rect"].y += power_up["speed"]
     if power_up["rect"].top > SCREEN_HEIGHT:
         power_up["rect"].x = random.randint(0, SCREEN_WIDTH - POWER_UP_WIDTH)
         power_up["rect"].y = random.randint(-100, -40)
 
-# Function to draw an entity
-def draw_entity(entity, surface):
-    surface.blit(entity["image"], entity["rect"].topleft)
+# This is a function to print/blit out all the images on the screen when called
+# (the image and its rectangle is blited)
+def draw_image(image, surface):
+    surface.blit(image["image"], image["rect"].topleft)
 
-# Function to draw the power-up timer
-def draw_power_up_timer(surface, spaceship, font):
+# This is a function that prints/blits out the power up's duration on screen when called 
+# (the text) 
+def draw_power_up_timer(text_area, spaceship, font):
     if spaceship["powered_up"]:
         current_time = pygame.time.get_ticks()
         remaining_time = max(0, spaceship["power_up_duration"] - (current_time - spaceship["power_up_time"]))
         timer_text = font.render(f"Power-up: {remaining_time / 1000:.1f}s", True, WHITE)
-        surface.blit(timer_text, (SCREEN_WIDTH - 200, 10))
+        text_area.blit(timer_text, (SCREEN_WIDTH - 200, 10))
 
-# Function to draw the defeat message and reset the game state
-def draw_defeat(surface, font):
+# This is a function that prints/blits out the message "defeat" and resets the game on the screen when called
+#  (the text at the center of the screen, then has a 3 sec delay before a reset)
+def draw_defeat(surface, font, score_text):
     defeat_text = font.render("DEFEAT", True, WHITE)
+    # defeat_score = font.render(score_text, True, WHITE) 
     surface.blit(defeat_text, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 2 - defeat_text.get_height() // 2))
+    # surface.blit(defeat_score, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 4 - defeat_text.get_height() // 4))
     pygame.display.flip()
     pygame.time.delay(3000)
     return True
@@ -135,35 +142,34 @@ def main():
                     running = False
                     game_over = True
 
-            keys = pygame.key.get_pressed()
-            dx = 0
-            if keys[pygame.K_LEFT]:
-                dx = -spaceship["speed"]
-            if keys[pygame.K_RIGHT]:
-                dx = spaceship["speed"]
-
-            spaceship_movement(spaceship, dx)
-            update_spaceship(spaceship)
-
             for enemy in enemys:
-                update_enemy(enemy)
+                falling_enemy(enemy)
                 if spaceship["rect"].colliderect(enemy["rect"]):
-                    game_over = draw_defeat(SCREEN, font)
+                    game_over = draw_defeat(SCREEN, font, score_text)
 
             for power_up in power_ups:
-                update_power_up(power_up)
+                falling_power_up(power_up)
                 if spaceship["rect"].colliderect(power_up["rect"]):
-                    spaceship["speed"] = 10  # Double the speed
+                    spaceship["speed"] = 10  
                     spaceship["powered_up"] = True
                     spaceship["power_up_time"] = pygame.time.get_ticks()
-                    power_up["rect"].y = SCREEN_HEIGHT + 1  # Move the power-up off the screen
+                    power_up["rect"].y = SCREEN_HEIGHT + 1  
+
+            i = 0
+            if pygame.key.get_pressed()[pygame.K_LEFT]:
+                i -= spaceship["speed"]
+            if pygame.key.get_pressed()[pygame.K_RIGHT]:
+                i = spaceship["speed"]
+
+            spaceship_movement(spaceship, i)
+            powered_up_spaceship(spaceship)
 
             SCREEN.fill(BLACK)
-            draw_entity(spaceship, SCREEN)
+            draw_image(spaceship, SCREEN)
             for enemy in enemys:
-                draw_entity(enemy, SCREEN)
+                draw_image(enemy, SCREEN)
             for power_up in power_ups:
-                draw_entity(power_up, SCREEN)
+                draw_image(power_up, SCREEN)
 
             score += 1
             score_text = font.render(f"Score: {score}", True, WHITE)
