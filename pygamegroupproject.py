@@ -114,9 +114,9 @@ def draw_power_up_timer(screen, spaceship):
 
 # This is a function that prints/blits out the message "defeat" and resets the game on the screen when called
 # (the text at the center of the screen, then has a 3 sec delay before a reset)
-def draw_defeat(screen, font, score_text):
-    defeat_text = font.render("DEFEAT", True, WHITE)
-    # defeat_score = font.render(score_text, True, WHITE) 
+def draw_defeat(screen):
+    defeat_text = pygame.font.SysFont("Times New Roman", 36).render("DEFEAT", True, WHITE)
+    # defeat_score = .render(score_text, True, WHITE) 
     screen.blit(defeat_text, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 2 - defeat_text.get_height() // 2))
     # surface.blit(defeat_score, (SCREEN_WIDTH // 2 - defeat_text.get_width() // 2, SCREEN_HEIGHT // 4 - defeat_text.get_height() // 4))
     pygame.display.flip()
@@ -159,7 +159,7 @@ def main():
             for enemy in enemys:
                 falling_enemy(enemy)
                 if spaceship["rect"].colliderect(enemy["rect"]):
-                    game_over = draw_defeat(SCREEN, score_text)
+                    game_over = draw_defeat(SCREEN)
 
             for power_up in power_ups:
                 falling_power_up(power_up)
@@ -190,7 +190,7 @@ def main():
             SCREEN.blit(score_text, (10, 10))
 
             draw_power_up_timer(SCREEN, spaceship)
-            pygame.display.update() # or .flip() 
+            pygame.display.update()
 
     pygame.quit()
 
