@@ -88,7 +88,7 @@ def falling_enemy(enemy):
     if enemy["rect"].top > SCREEN_HEIGHT:
         enemy["rect"].x = random.randint(0, SCREEN_WIDTH - ENEMY_WIDTH)
         enemy["rect"].y = random.randint(-100, -40)
-        enemy["speed"] = random.randint(3, 8)
+        # enemy["speed"] = random.randint(3, 8)
 
 # This is a function to make the changes on power up
 # When it falls out of screen, it resets
