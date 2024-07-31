@@ -171,6 +171,8 @@ def main():
                     spaceship["power_up_time"] = pygame.time.get_ticks()
                     power_up["rect"].y = SCREEN_HEIGHT + 1  
 
+            powered_up_spaceship(spaceship)
+
             i = 0
             if pygame.key.get_pressed()[pygame.K_LEFT]:
                 i -= spaceship["speed"]
@@ -178,7 +180,6 @@ def main():
                 i = spaceship["speed"]
 
             spaceship_movement(spaceship, i)
-            powered_up_spaceship(spaceship)
 
             SCREEN.fill(BLACK)
             draw_image(spaceship, SCREEN)
