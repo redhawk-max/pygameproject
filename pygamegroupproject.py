@@ -1,14 +1,13 @@
-# Importing Libraries for specific functions and methods
 import pygame
 import random
 import os
-# Importing Modules for a specific use cases i.e. font, mixer
+
 pygame.init()
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Enemy Dodger")
+pygame.display.set_caption("enemy Dodger")
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 FPS = 60
@@ -102,7 +101,7 @@ def falling_power_up(power_up):
 # This is a function to print/blit out all the images on the screen when called
 # (the image and its rectangle is blited)
 def draw_image(image, screen):
-    screen.blit(image["image"], image["rect"].topleft)
+    screen.blit(image["image"], image["rect"])
 
 # This is a function that prints/blits out the power up's duration on screen when called 
 # (the text) 
@@ -140,17 +139,17 @@ def main():
     clock = pygame.time.Clock()
     
     running = True
+    
     SCREEN.fill(BLACK)
     countdown(SCREEN, 5)
-    # Overall game session
     while running:
         spaceship = create_spaceship()
         enemys = [create_enemy() for _ in range(5)]
         power_ups = [create_power_up() for _ in range(1)]
         score = 0
-
+        
         game_over = False
-        # Specific game mechanics 
+
         while not game_over:
             clock.tick(FPS)
             for event in pygame.event.get():
@@ -158,6 +157,13 @@ def main():
                     running = False
                     game_over = True
 
+            SCREEN.fill(BLACK)
+            draw_image(spaceship, SCREEN)
+            for enemy in enemys:
+                draw_image(enemy, SCREEN)
+            for power_up in power_ups:
+                draw_image(power_up, SCREEN)
+            
             for enemy in enemys:
                 falling_enemy(enemy)
                 if spaceship["rect"].colliderect(enemy["rect"]):
@@ -180,13 +186,8 @@ def main():
                 i = spaceship["speed"]
 
             spaceship_movement(spaceship, i)
+            
 
-            SCREEN.fill(BLACK)
-            draw_image(spaceship, SCREEN)
-            for enemy in enemys:
-                draw_image(enemy, SCREEN)
-            for power_up in power_ups:
-                draw_image(power_up, SCREEN)
 
             score += 1
             score_text = pygame.font.SysFont("Times New Roman", 36).render(f"Score: {score}", True, WHITE)
@@ -197,5 +198,20 @@ def main():
 
     pygame.quit()
 
-if __name__ == "__main__":
-    main()
+
+main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
