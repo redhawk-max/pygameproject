@@ -7,7 +7,7 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Enemy Dodger")
+pygame.display.set_caption("enemy Dodger")
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 FPS = 60
@@ -18,14 +18,14 @@ ENEMY_HEIGHT = 50
 POWER_UP_WIDTH = 30
 POWER_UP_HEIGHT = 30
 
-background_img = pygame.image.load(os.path.join("Assets", "space.png"))
+background_img = pygame.image.load(os.path.join("C:\\Users\\HP\\Downloads\\Game Files\\Assets\\space.png"))
 background_img = pygame.transform.scale(background_img, (SCREEN_WIDTH, SCREEN_HEIGHT))
-spaceship_img = pygame.image.load(os.path.join("Assets", "spaceship_yellow.png"))
+spaceship_img = pygame.image.load(os.path.join("C:\\Users\\HP\\Downloads\\Game Files\\Assets\\spaceship_yellow.png"))
 spaceship_img = pygame.transform.scale(spaceship_img, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 spaceship_img = pygame.transform.rotate(spaceship_img, 180)
-enemy_img = pygame.image.load(os.path.join("Assets", "spaceship_red.png"))
+enemy_img = pygame.image.load(os.path.join("C:\\Users\\HP\\Downloads\\Game Files\\Assets\\spaceship_red.png"))
 enemy_img = pygame.transform.scale(enemy_img, (ENEMY_WIDTH, ENEMY_HEIGHT))
-power_up_img = pygame.image.load(os.path.join("Assets", "power_block.gif"))
+power_up_img = pygame.image.load(os.path.join("C:\\Users\\HP\\Downloads\\Game Files\\Assets\\power_block.gif"))
 power_up_img = pygame.transform.scale(power_up_img, (POWER_UP_WIDTH, POWER_UP_HEIGHT))
 
 # ****************************************************** #
@@ -48,7 +48,7 @@ def create_enemy():
         "image": enemy_img,
         "rect": enemy_img.get_rect(x=random.randint(0, SCREEN_WIDTH - ENEMY_WIDTH),
                                       y=random.randint(-100, -40)),
-        "speed": random.randint(3, 8)
+        "speed": random.randint(3, 22)
     }
     return enemy
 
@@ -200,18 +200,3 @@ def main():
 
 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
