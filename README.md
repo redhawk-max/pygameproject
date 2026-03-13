@@ -1,51 +1,62 @@
-🚀 Enemy Dodger (Pygame)
+# Enemy Dodger (Pygame)
 
-Enemy Dodger is a simple arcade-style game built with Python and Pygame.
-The player controls a spaceship and must avoid incoming enemy ships while collecting power-ups to temporarily increase movement speed.
+Enemy Dodger is a simple arcade-style game built with **Python** and **Pygame**.  
+The player controls a spaceship and must **avoid incoming enemy ships** while collecting **power-ups** to temporarily increase movement speed.
 
-🎮 Gameplay
+---
 
-Control a yellow spaceship at the bottom of the screen.
+##  Gameplay
 
-Enemy ships fall from the top of the screen.
+- Control a **yellow spaceship** at the bottom of the screen.
+- **Enemy ships** fall from the top of the screen.
+- Avoid colliding with enemies.
+- Collect **power-ups** to temporarily increase your spaceship's speed.
+- Survive as long as possible to increase your **score**.
 
-Avoid colliding with enemies.
+If you collide with an enemy ship, the game ends and displays **DEFEAT** before restarting.
 
-Collect power-ups to temporarily increase your spaceship's speed.
+---
 
-Survive as long as possible to increase your score.
+## 🕹 Controls
 
-If you collide with an enemy ship, the game ends and displays DEFEAT before restarting.
+| Key | Action |
+|-----|--------|
+| ⬅ Left Arrow | Move left |
+| ➡ Right Arrow | Move right |
+| Close Window | Quit game |
 
-🕹 Controls
-Key	Action
-⬅ Left Arrow	Move left
-➡ Right Arrow	Move right
-❌ Close Window	Quit game
-⚡ Power-Ups
+---
+
+##  Power-Ups
 
 Power-ups increase your spaceship speed temporarily.
 
-Normal Speed: 5
-
-Power-Up Speed: 10
-
-Duration: 3 seconds
+- **Normal Speed:** 5  
+- **Power-Up Speed:** 10  
+- **Duration:** 3 seconds  
 
 A timer appears on the screen while the power-up is active.
 
-📦 Requirements
+---
+
+##  Requirements
 
 Make sure you have the following installed:
 
-Python 3.x
-
-Pygame
+- Python 3.x
+- Pygame
 
 Install pygame with:
 
+```bash
 pip install pygame
-📁 Project Structure
+```
+
+---
+
+##  Project Structure
+
+```
 Enemy-Dodger/
 │
 ├── main.py
@@ -55,57 +66,64 @@ Enemy-Dodger/
     ├── spaceship_yellow.png
     ├── spaceship_red.png
     └── power_block.gif
-▶️ How to Run
+```
 
-Clone the repository:
+---
 
+##  How to Run
+
+1. Clone the repository:
+
+```bash
 git clone https://github.com/yourusername/enemy-dodger.git
+```
 
-Navigate to the folder:
+2. Navigate into the folder:
 
+```bash
 cd enemy-dodger
+```
 
-Run the game:
+3. Run the game:
 
+```bash
 python main.py
-🧠 Game Features
+```
 
-Countdown before the game starts
+---
 
-Falling enemy ships with random speeds
+## Game Features
 
-Collectable power-ups
+- Countdown before the game starts
+- Falling enemy ships with random speeds
+- Collectable power-ups
+- Power-up timer display
+- Collision detection
+- Score tracking
+- Automatic game reset after defeat
 
-Power-up timer display
+---
 
-Collision detection
+##  Built With
 
-Score tracking
+- **Python**
+- **Pygame**
 
-Automatic game reset after defeat
+---
 
-🛠 Built With
-
-Python
-
-Pygame
-
-📈 Future Improvements
+##  Future Improvements
 
 Possible features to add:
 
-Sound effects and music
+- Sound effects and music
+- Different enemy types
+- Increasing difficulty over time
+- High score system
+- Start menu and restart button
+- Animations
 
-Different enemy types
+---
 
-Increasing difficulty over time
+## Authors
 
-High score system
-
-Start menu and restart button
-
-Animations
-
-👨‍💻 Author
-
-Created by [Your Name]
+Created by **Adil Rehan** , **Yusuf Sulaiman**, ** Said Derbas**
