@@ -126,4 +126,4 @@ Possible features to add:
 
 ## Authors
 
-Created by **Adil Rehan** , **Yusuf Sulaiman**, ** Said Derbas**
+Created by **Adil Rehan** , **Yusuf Sulaiman**, **Said Derbas**
